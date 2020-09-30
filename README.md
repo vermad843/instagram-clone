@@ -6,4 +6,4 @@
 
 [x] ColorZilla for color codes(CTRL+ALT+Z)
 
-[x]
+[x] npm install @material-ui/core
