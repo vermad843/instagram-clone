@@ -7,3 +7,13 @@
 [x] ColorZilla for color codes(CTRL+ALT+Z)
 
 [x] npm install @material-ui/core
+
+[x] for firestore create a project 
+
+     .cloud firestore for database 
+     
+     .go to project settings to grab to config fie and paste it to firebase.js
+
+[x] npm i firebase
+
+[x] useEffect - run code on a condition 
