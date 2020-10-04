@@ -17,3 +17,9 @@
 [x] npm i firebase
 
 [x] useEffect - run code on a condition 
+
+[x] working on firebase User Authentication
+    
+    .enable email/password other options are there
+
+[x] working on a modal
