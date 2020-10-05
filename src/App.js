@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
 import Post from './Post';
-import {db} from './firebase';
+import {db, auth} from './firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core';
@@ -38,6 +38,28 @@ function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+   const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if(authUser) {
+          console.log(authUser);
+          setUser(authUser);
+          if(authUser.displayName) {
+
+          }else {
+            return authUser.updateProfile({
+              displayName : username,
+            });
+          }
+      }else {
+        setUser(null);
+      }
+    })
+    return () => {
+      unsubscribe();
+    }
+  }, [user, username]);
 
    
   useEffect(() => {
@@ -50,7 +72,9 @@ function App() {
   }, []);
 
   const signUp = (event) => {
-       
+       event.preventDefault();
+       auth.createUserWithEmailAndPassword(email,password)
+       .catch((error) => alert(error.message));
   }
 
   return (
@@ -86,7 +110,7 @@ function App() {
               value = {password}
               onChange = {(e) => setPassword(e.target.value)}
             />
-            <Button onClick = {signUp}>Sign Up</Button>
+            <Button type = "submit" onClick = {signUp}>Sign Up</Button>
             </form>
        </div>
        </Modal>
